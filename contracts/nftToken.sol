@@ -9,8 +9,8 @@ import "hardhat/console.sol";
 
 contract MichyNft is ERC721URIStorage  {
    // @notice helps to keep tract of TokensIds 
-    using counters for counters.counter; 
-    counters.counter private _tokensId; 
+   using Counters for Counters.Counter;
+   Counters.Counter private _tokensId; 
 
     constructor() ERC721 ("MichyToken", "MTK") {
         console.log("Hey, this is Michy's nft");
@@ -22,12 +22,14 @@ contract MichyNft is ERC721URIStorage  {
         uint256 newNft = _tokensId.current();
 
          //@notice mint the nft to the sender 
-        _safeMint(msg.sender, newNft);
+       _safeMint(msg.sender, newNft);
+        
         
         //@notice set the nft data
-        _setTokenURI(newNft, "blabla");
+        _setTokenURI(newNft, "https://jsonkeeper.com/b/NPDP");
+        console.log("NFT has been minted to %s..", msg.sender);
 
-        //@notice increament the counter for the next minted nft 
-        _tokensId.increament();
+        //@notice increment the counter for the next minted nft 
+        _tokensId.increment(); 
     }
 }
