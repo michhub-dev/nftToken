@@ -15,6 +15,19 @@ contract MichyNft is ERC721URIStorage  {
     constructor() ERC721 ("MichyToken", "MTK") {
         console.log("Hey, this is Michy's nft");
     }
-
     
+    //@notice declare a function for users to get their NFT.
+    function getNfts() public {
+        //@notice get the current tokenid 
+        uint256 newNft = _tokensId.current();
+
+         //@notice mint the nft to the sender 
+        _safeMint(msg.sender, newNft);
+        
+        //@notice set the nft data
+        _setTokenURI(newNft, "blabla");
+
+        //@notice increament the counter for the next minted nft 
+        _tokensId.increament();
+    }
 }
