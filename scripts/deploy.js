@@ -8,9 +8,9 @@ const main = async () => {
     await mintNftContract.wait(); 
     console.log("Minting the first time");
 
-    mintNftContract = await contractFactory.getNfts();
+    /*mintNftContract = await contractFactory.getNfts();
     await mintNftContract.wait(); 
-    console.log("Minting the second time");
+    console.log("Minting the second time"); */
 };
 
 const runMain = async () => {
