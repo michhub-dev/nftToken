@@ -18,11 +18,33 @@ contract MichyNft is ERC721URIStorage  {
     string [] foodItem = ["salt", "seasoning-cube", "crayfish", "pepper", "tommatoes", "onion", "fresh-fish", "vegetables", "semo", "pomo", "stock-fish", "palm-oil", "dried-fish", "assorted", "ogiri"];
     string [] fruits = ["cuccumba", "mango", "avocado", "peneapple", "bananas", "blackberry", "strawberry", "kiwi", "lemon", "carrot", "soursop", "pawpaw", "pears", "apple", "orange"];
     string [] animals = ["dog", "monkey", "geraf", "zebra", "chetah", "antelop", "scurrel", "hippopotamus", "pig", "sheep", "cow", "goat", "eliphant", "tiger", "lion"];
-    
+
     constructor() ERC721 ("MichyToken", "MTK") {
         console.log("Hey, this is Michy's nft");
     }
     
+    //@notice a function that will randomly pick word from each array
+    function getRandomFoodItem(uint256 tokenId) public view returns(string memory) {
+        uint256 rand = random(string(abi.encodePacked("salt", Strings.toString(tokenId))));
+        rand = rand % foodItem.length;
+        return foodItem[rand]; 
+    }
+
+    function getRandomFruits(uint256 tokenId) public view returns(string memory) {
+        uint256 rand = random(string(abi.encodePacked("cuccumba", Strings.toString(tokenId))));
+        rand = rand % fruits.length; 
+        return fruits[rand]; 
+    }
+    function getRandomAnimals(uint256 tokenId) public view returns(string memory) {
+        uint256 rand = random(string(abi.encodePacked("dog", Strings.toString(tokenId))));
+        rand = rand % animals.length;
+        return animals[rand];
+    }
+
+
+    function random(string memory input) internal pure returns(uint256) {
+ 
+    }
     //@notice declare a function for users to get their NFT.
     function getNfts() public {
         //@notice get the current tokenid 
