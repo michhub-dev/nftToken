@@ -43,7 +43,7 @@ contract MichyNft is ERC721URIStorage  {
 
 
     function random(string memory input) internal pure returns(uint256) {
- 
+   return uint256(keccak256(abi.encodePacked(input)));
     }
     //@notice declare a function for users to get their NFT.
     function getNfts() public {
