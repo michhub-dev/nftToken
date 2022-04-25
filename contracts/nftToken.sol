@@ -55,9 +55,9 @@ contract MichyNft is ERC721URIStorage  {
   string memory firstItem = getRandomFoodItem(newNft);
   string memory secondItem = getRandomFruits(newNft);
   string memory thirdItem = getRandomAnimals(newNft); 
-  string memory combineItem = string(abi.encodePacked(firstItem, secondItem, thirdItem));
+
 //@notice combine them all together and close with the tag
-  string memory combineItemAndSvg = string(abi.encodePacked(svg, combineItem, "</text></svg>"));
+  string memory combineItemAndSvg = string(abi.encodePacked(svg, firstItem, secondItem, thirdItem, "</text></svg>"));
 
 
          //@notice mint the nft to the sender 
