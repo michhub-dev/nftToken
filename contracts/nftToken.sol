@@ -7,6 +7,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 
+// import helper functions  
+import { Base64 } from "./libraries/Base64.sol";
+
 contract MichyNft is ERC721URIStorage  {
    // @notice helps to keep tract of TokensIds 
    using Counters for Counters.Counter;
