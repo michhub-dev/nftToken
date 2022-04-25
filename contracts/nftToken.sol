@@ -58,7 +58,9 @@ contract MichyNft is ERC721URIStorage  {
 
 //@notice combine them all together and close with the tag
   string memory combineItemAndSvg = string(abi.encodePacked(svg, firstItem, secondItem, thirdItem, "</text></svg>"));
-
+  console.log("\n--------------------");
+  console.log(combineItemAndSvg);
+  console.log("--------------------\n");
 
          //@notice mint the nft to the sender 
        _safeMint(msg.sender, newNft);
@@ -70,5 +72,6 @@ contract MichyNft is ERC721URIStorage  {
 
         //@notice increment the counter for the next minted nft 
         _tokensId.increment(); 
+        console.log("An nft has been minted to %s..", newNft, msg.sender);
     }
 }
