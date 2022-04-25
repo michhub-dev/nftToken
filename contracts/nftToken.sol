@@ -58,9 +58,30 @@ contract MichyNft is ERC721URIStorage  {
   string memory firstItem = getRandomFoodItem(newNft);
   string memory secondItem = getRandomFruits(newNft);
   string memory thirdItem = getRandomAnimals(newNft); 
-
+  string memory combineItem = string(abi.encodePacked(firstItem, secondItem,thirdItem));
 //@notice combine them all together and close with the tag
-  string memory combineItemAndSvg = string(abi.encodePacked(svg, firstItem, secondItem, thirdItem, "</text></svg>"));
+  string memory combineItemAndSvg = string(abi.encodePacked(svg, combineItem, "</text></svg>"));
+
+  //@notice get all json metadata 
+  //@notice set the title of the nft as the generated word
+  //@notice add data:image/svg+xml;base64 and then append base64 encode svg.
+  string memory json = Base64.encode(
+      bytes(
+          string(
+              abi.encodePacked(
+                  '{"name": "',
+                   combineItem, '",
+                   "description": "A highly acclaim memes.", 
+                   "image": "data:image/svg+xml;base64,',
+                    Base64.encode(bytes(combineItemAndSvg)),
+                     '"}'
+                )
+            )
+        )
+    );
+
+    //@notice prepend data:application/json;base64, to json
+    string memory finalTokenUrl = string(abi.encodePacked("data:application/json;base64,", json));
   console.log("\n--------------------");
   console.log(combineItemAndSvg);
   console.log("--------------------\n");
@@ -70,7 +91,7 @@ contract MichyNft is ERC721URIStorage  {
         
         
         //@notice set the nft data
-        _setTokenURI(newNft,  "blabla" /* "data:application/json;base64,ewogICAgIm5hbWUiOiAiRXBpY0xvcmRIYW1idXJnZXIiLAogICAgImRlc2NyaXB0aW9uIjogIkFuIE5GVCBmcm9tIHRoZSBoaWdobHkgYWNjbGFpbWVkIHNxdWFyZSBjb2xsZWN0aW9uIiwKICAgICJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSEJ5WlhObGNuWmxRWE53WldOMFVtRjBhVzg5SW5oTmFXNVpUV2x1SUcxbFpYUWlJSFpwWlhkQ2IzZzlJakFnTUNBek5UQWdNelV3SWo0TkNpQWdJQ0E4YzNSNWJHVStMbUpoYzJVZ2V5Qm1hV3hzT2lCM2FHbDBaVHNnWm05dWRDMW1ZVzFwYkhrNklITmxjbWxtT3lCbWIyNTBMWE5wZW1VNklERTBjSGc3SUgwOEwzTjBlV3hsUGcwS0lDQWdJRHh5WldOMElIZHBaSFJvUFNJeE1EQWxJaUJvWldsbmFIUTlJakV3TUNVaUlHWnBiR3c5SW1Kc1lXTnJJaUF2UGcwS0lDQWdJRHgwWlhoMElIZzlJalV3SlNJZ2VUMGlOVEFsSWlCamJHRnpjejBpWW1GelpTSWdaRzl0YVc1aGJuUXRZbUZ6Wld4cGJtVTlJbTFwWkdSc1pTSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0krUlhCcFkweHZjbVJJWVcxaWRYSm5aWEk4TDNSbGVIUStEUW84TDNOMlp6ND0iCn0="*/);
+        _setTokenURI(newNft, finalTokenUrl);
         console.log("NFT has been minted to %s..", msg.sender);
 
         //@notice increment the counter for the next minted nft 
