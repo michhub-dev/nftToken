@@ -2,6 +2,7 @@
 ## Minted NFT 
  https://t.co/VhJDvE7R50
 * New dynamically generated NFT https://testnets.opensea.io/collection/michytoken-v4
+* New etherscan link https://rinkeby.etherscan.io/address/0xe1200F940905b8C8154a64C88C47803653DB8d1a
 ## Etherscan link
  https://t.co/Z9Fy2y3EBq
 
