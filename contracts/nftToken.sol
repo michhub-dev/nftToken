@@ -70,9 +70,9 @@ contract MichyNft is ERC721URIStorage  {
           string(
               abi.encodePacked(
                   '{"name": "',
-                   combineItem, '",
-                   "description": "A highly acclaim memes.", 
-                   "image": "data:image/svg+xml;base64,',
+                   combineItem, "",
+                   "description:" "A highly acclaimed memes.", 
+                   "image:" "data:image/svg+xml;base64,'",
                     Base64.encode(bytes(combineItemAndSvg)),
                      '"}'
                 )
@@ -83,7 +83,12 @@ contract MichyNft is ERC721URIStorage  {
     //@notice prepend data:application/json;base64, to json
     string memory finalTokenUrl = string(abi.encodePacked("data:application/json;base64,", json));
   console.log("\n--------------------");
-  console.log(combineItemAndSvg);
+ console.log(
+    string(
+        abi.encodePacked(
+            "https://nftpreview.0xdev.codes/?code=",
+            finalTokenUrl
+        )));
   console.log("--------------------\n");
 
          //@notice mint the nft to the sender 
