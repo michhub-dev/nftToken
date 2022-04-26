@@ -22,4 +22,5 @@ const runMain = async () => {
         console.log(error); 
         process.exit(1); 
     }
-}
+};
+runMain();
