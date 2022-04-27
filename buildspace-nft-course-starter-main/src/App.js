@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
+import { ethers } from "ethers";
 
 // Constants
 const TWITTER_HANDLE = '_buildspace';
@@ -60,20 +61,25 @@ const App = () => {
       if (ethereum) {
         const provider = new ethers.providers.web3Provider(ethereum);
         const signer = provider.getSigner();
-        const getContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
+        // create the connection to the contract 
+        const connectContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
 
         console.log("pop wallet now to pay gas...")
-        const nftTxn = await getContract.getNfts();
+        //call the contract
+        const nftTxn = await connectContract.getNfts();
         console.log("Mining...pls wait");
-          await nftTxn.wait();
+          await nftTxn.wait();//wait for it to be mined
+        // link the etherscan url 
         console.log(`Mined, view transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
       } else{
-        alert("ethereum object doesn't exist")
+        alert("ethereum object doesn't exist");
       }
     } catch(error) {
-      console.log(error);
+      console.log(error)
     }
   }
+  
+
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button className="cta-button connect-wallet-button" onClick={connectWallet}>
@@ -93,9 +99,15 @@ const App = () => {
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
           </p>
-          {renderNotConnectedContainer()}
-          {/* <p className="sub-text">Contract public addresses {userAddress}</p> */}
+         {/* {renderNotConnectedContainer()}
+           <p className="sub-text">Contract public addresses {userAddress}</p> */}
         </div>
+          {userAccount === "" 
+     ? renderNotConnectedContainer()
+    : (
+      <button onClick={callContractFromWeb} className="cta-button connect-wallet-button"> Mint NFT</button>
+    )}
+  );
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
           <a
