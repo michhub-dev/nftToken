@@ -1,4 +1,4 @@
-import React, { useEffect, UseState } from 'react';
+import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
 
@@ -19,20 +19,21 @@ const App = () => {
     if(!ethereum) {
       console.log("Get metamask!");
       return;
-    } else {
+    } else{
       console.log("You are good to go", ethereum);
     }
-  }
+  
   // check if we are authorize to access the users wallet
   const accounts = await ethereum.request({ method: 'eth_accounts' });
 // check if the user has more than one account, then grap the first one
-    if (accounts.length !== 0) {
-            const account = accounts[0];
-    console.log("Found an authorized account", account);
-    setUserAccount(account);
+  if (accounts.length !== 0) {
+      const account = accounts[0];
+      console.log("Found an authorized account:", account);
+      setUserAccount(account);
     } else {
-    console.log("No authorized account found");
-    }                                       
+      console.log("No authorized account found");
+    }
+  }
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button className="cta-button connect-wallet-button">
@@ -42,7 +43,7 @@ const App = () => {
 
   useEffect(() => {
     checkIfConnected();
-  }, [])
+  },[])
 
   return (
     <div className="App">
