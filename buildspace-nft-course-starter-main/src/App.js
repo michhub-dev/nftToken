@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
 import { ethers } from "ethers";
+import MichyNft from './utils/MichyNft.json';
 
 // Constants
 const TWITTER_HANDLE = '_buildspace';
@@ -53,7 +54,7 @@ const App = () => {
   }
    }
   const callContractFromWeb = async () => {
-    const contractAddress = "0xe1200F940905b8C8154a64C88C47803653DB8d1a";
+    const contractAddress = "0xaaD1b3C55671379DC208AB2De6143798b3809446";
 
     try{
       const { ethereum } = window;
