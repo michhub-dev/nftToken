@@ -34,6 +34,23 @@ const App = () => {
       console.log("No authorized account found");
     }
   }
+  const connectWallet = async () => {
+   try{
+      const { ethereum } = window;
+
+    if (!ethereum) {
+      alert("Get metamask");
+      return;
+    }
+
+    // Request access to account 
+ const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+     const userAddress = accounts[0];
+setUserAccount(accounts[0]);
+  } catch(error){
+     console.log(error);
+  }
+   }
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button className="cta-button connect-wallet-button">
