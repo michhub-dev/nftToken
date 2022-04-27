@@ -53,7 +53,7 @@ setUserAccount(accounts[0]);
    }
   // Render Methods
   const renderNotConnectedContainer = () => (
-    <button className="cta-button connect-wallet-button">
+    <button className="cta-button connect-wallet-button" onClick={connectWallet}>
       Connect to Wallet
     </button>
   );
