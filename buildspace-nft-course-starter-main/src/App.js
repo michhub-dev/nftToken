@@ -45,12 +45,35 @@ const App = () => {
 
     // Request access to account 
  const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-     const userAddress = accounts[0];
-setUserAccount(accounts[0]);
+     console.log("Connected", accounts[0]);
+ const userAddress = setUserAccount(accounts[0]);
   } catch(error){
      console.log(error);
   }
    }
+  const callContractFromWeb = async () => {
+    const contractAddress = "0xe1200F940905b8C8154a64C88C47803653DB8d1a";
+
+    try{
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const getContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
+
+        console.log("pop wallet now to pay gas...")
+        const nftTxn = await getContract.getNfts();
+        console.log("Mining...pls wait");
+          await nftTxn.wait();
+        console.log(`Mined, view transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
+      } else{
+        alert("ethereum object doesn't exist")
+      }
+    } catch(error) {
+      console.log(error);
+    }
+  }
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button className="cta-button connect-wallet-button" onClick={connectWallet}>
@@ -66,11 +89,12 @@ setUserAccount(accounts[0]);
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header gradient-text">My NFT Collection</p>
+          <p className="header gradient-text">Michy's NFT Collection</p>
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
           </p>
           {renderNotConnectedContainer()}
+          {/* <p className="sub-text">Contract public addresses {userAddress}</p> */}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
