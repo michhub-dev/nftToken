@@ -22,6 +22,8 @@ contract MichyNft is ERC721URIStorage  {
     string [] fruits = ["cuccumba", "mango", "avocado", "peneapple", "bananas", "blackberry", "strawberry", "kiwi", "lemon", "carrot", "soursop", "pawpaw", "pears", "apple", "orange"];
     string [] animals = ["dog", "monkey", "geraf", "zebra", "chetah", "antelop", "scurrel", "hippopotamus", "pig", "sheep", "cow", "goat", "eliphant", "tiger", "lion"];
 
+event NewMichyNftMinted(address sender, uint256 tokenId); 
+
     constructor() ERC721 ("MichyToken", "MTK") {
         console.log("Hey, this is Michy's nft");
     }
@@ -102,5 +104,7 @@ contract MichyNft is ERC721URIStorage  {
         //@notice increment the counter for the next minted nft 
         _tokensId.increment(); 
         console.log("An nft has been minted to %s..", newNft, msg.sender);
+
+        emit NewMichyNftMinted(msg.sender, newNft); 
     }
 }
