@@ -60,7 +60,7 @@ const App = () => {
       const { ethereum } = window;
 
       if (ethereum) {
-        const provider = new ethers.providers.web3Provider(ethereum);
+        const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         // create the connection to the contract 
         const connectContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
@@ -82,7 +82,7 @@ const App = () => {
   
 
   // Render Methods
-  const renderNotConnectedContainer = () => (
+  const RenderNotConnected = () => (
     <button className="cta-button connect-wallet-button" onClick={connectWallet}>
       Connect to Wallet
     </button>
@@ -100,11 +100,11 @@ const App = () => {
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
           </p>
-         {/* {renderNotConnectedContainer()}
+         {/* {RenderNotConnected()}
            <p className="sub-text">Contract public addresses {userAddress}</p> */}
         </div>
           {userAccount === "" 
-     ? renderNotConnectedContainer()
+     ? RenderNotConnected()
     : (
       <button onClick={callContractFromWeb} className="cta-button connect-wallet-button"> Mint NFT</button>
     )}
