@@ -32,10 +32,13 @@ const App = () => {
       const account = accounts[0];
       console.log("Found an authorized account:", account);
       setUserAccount(account);
+    setEventListener();
+    
     } else {
       console.log("No authorized account found");
     }
   }
+  // function to connect the wallet
   const connectWallet = async () => {
    try{
       const { ethereum } = window;
@@ -49,10 +52,37 @@ const App = () => {
  const accounts = await ethereum.request({ method: "eth_requestAccounts" });
      console.log("Connected", accounts[0]);
  const userAddress = setUserAccount(accounts[0]);
+
+     setEventListener();
   } catch(error){
      console.log(error);
   }
    }
+  // set an event listener
+  const setEventListener = async () => {
+    try{
+      const { ethereum } = window;
+
+      if(ethereum){
+        const provider = new ethers.providers.web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
+contractAddress.on(NewMichyNftMinted, (from, tokenId) => {
+  console.log(from, tokenId.toNumber());
+  alert(`Your NFT has been minted and sent to your wallet. It may be blank right now, it could take a max of 10 min to show on the opensea. View it here: https://testnets.opensea.io/assets/${contractAddress}/${tokenId.toNumber()}`);
+});
+        console.log("Set up event listener")
+      
+    
+    } else {
+        console.log("Ethereum object doesn't exist");
+      } 
+    } catch(error){
+      console.log(error)
+      }
+  }
+
+  // function to call the contract from the web
   const callContractFromWeb = async () => {
     const contractAddress = "0xd23d17B0AB8F10b29d093A76f4BE1bee8165f7A5";
 
@@ -60,10 +90,11 @@ const App = () => {
       const { ethereum } = window;
 
       if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
+  const provider = new ethers.providers.Web3Provider(ethereum);
+const signer = provider.getSigner();
         // create the connection to the contract 
-        const connectContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
+        const connectContract = new ethers.Contract(contractAddress, MichyNft.abi, signer);
+        
 
         console.log("pop wallet now to pay gas...")
         //call the contract
@@ -82,7 +113,7 @@ const App = () => {
   
 
   // Render Methods
-  const RenderNotConnected = () => (
+  const renderNotConnected = () => (
     <button className="cta-button connect-wallet-button" onClick={connectWallet}>
       Connect to Wallet
     </button>
@@ -99,12 +130,12 @@ const App = () => {
           <p className="header gradient-text">Michy's NFT Collection</p>
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
-          </p> 
-         {/* {RenderNotConnected()}
+          </p>
+         {/* {renderNotConnected()}
            <p className="sub-text">Contract public addresses {userAddress}</p> */}
         </div>
           {userAccount === "" 
-     ? RenderNotConnected()
+     ? renderNotConnected()
     : (
       <button onClick={callContractFromWeb} className="cta-button connect-wallet-button"> Mint NFT</button>
     )}
