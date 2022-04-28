@@ -99,7 +99,7 @@ const App = () => {
           <p className="header gradient-text">Michy's NFT Collection</p>
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
-          </p>
+          </p> 
          {/* {RenderNotConnected()}
            <p className="sub-text">Contract public addresses {userAddress}</p> */}
         </div>
