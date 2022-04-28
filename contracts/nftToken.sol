@@ -17,11 +17,13 @@ contract MichyNft is ERC721URIStorage  {
 
    //@notice store my svg
      string svg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='black' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
+     string svgTwo =   "'/><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
 
     string [] foodItem = ["salt", "seasoning-cube", "crayfish", "pepper", "tommatoes", "onion", "fresh-fish", "vegetables", "semo", "pomo", "stock-fish", "palm-oil", "dried-fish", "assorted", "ogiri"];
     string [] fruits = ["cuccumba", "mango", "avocado", "peneapple", "bananas", "blackberry", "strawberry", "kiwi", "lemon", "carrot", "soursop", "pawpaw", "pears", "apple", "orange"];
     string [] animals = ["dog", "monkey", "geraf", "zebra", "chetah", "antelop", "scurrel", "hippopotamus", "pig", "sheep", "cow", "goat", "eliphant", "tiger", "lion"];
 
+   string [] colors = ["green", "blue", "yellow", "red", "brown", "white", "black", "purple", "pink", "grey", "orange", "gold", "silver"];
 event NewMichyNftMinted(address sender, uint256 tokenId); 
 
     constructor() ERC721 ("MichyToken", "MTK") {
@@ -45,7 +47,12 @@ event NewMichyNftMinted(address sender, uint256 tokenId);
         rand = rand % animals.length;
         return animals[rand];
     }
-
+   
+   function getRandomColors(uint256 tokenId) public view returns(string memory) {
+       uint256 rand = random(string(abi.encodePacked("green", Strings.toString(tokenId))));
+       rand = rand % colors.length;
+       return colors[rand];
+   }
 
     function random(string memory input) internal pure returns(uint256) {
    return uint256(keccak256(abi.encodePacked(input)));
@@ -61,8 +68,10 @@ event NewMichyNftMinted(address sender, uint256 tokenId);
   string memory secondItem = getRandomFruits(newNft);
   string memory thirdItem = getRandomAnimals(newNft); 
   string memory combineItem = string(abi.encodePacked(firstItem, secondItem,thirdItem));
+
+  string memory randomColors = getRandomColors(newNft);
 //@notice combine them all together and close with the tag
-  string memory combineItemAndSvg = string(abi.encodePacked(svg, combineItem, "</text></svg>"));
+  string memory combineItemAndSvg = string(abi.encodePacked(svg, randomColors, svgTwo, combineItem, "</text></svg>"));
 
   //@notice get all json metadata 
   //@notice set the title of the nft as the generated word
