@@ -58,7 +58,8 @@ const App = () => {
      console.log(error);
   }
    }
-  // set an event listener
+  /*set an event listener capture the mint event,
+  * get the tokenId, and give the user their OpenSea link for their newly minted NFT.*/
   const setEventListener = async () => {
     try{
       const { ethereum } = window;
