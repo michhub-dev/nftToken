@@ -54,7 +54,7 @@ const App = () => {
   }
    }
   const callContractFromWeb = async () => {
-    const contractAddress = "0xaaD1b3C55671379DC208AB2De6143798b3809446";
+    const contractAddress = "0xd23d17B0AB8F10b29d093A76f4BE1bee8165f7A5";
 
     try{
       const { ethereum } = window;
