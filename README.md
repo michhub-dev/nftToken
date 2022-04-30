@@ -1,12 +1,13 @@
 ## Deployed a smart contract that can mint NFTs. 
 ## Minted NFT 
  https://t.co/VhJDvE7R50
-* New dynamically generated NFT https://testnets.opensea.io/collection/michytoken-v4
-* New etherscan link https://rinkeby.etherscan.io/address/0xe1200F940905b8C8154a64C88C47803653DB8d1a
+* New dynamically generated NFT: https://testnets.opensea.io/collection/michytoken-v4
+* New etherscan link: https://rinkeby.etherscan.io/address/0xe1200F940905b8C8154a64C88C47803653DB8d1a
 ## Etherscan link
  https://t.co/Z9Fy2y3EBq
 
-
+* Verified contract on Etherscan: https://rinkeby.etherscan.io/address/0xD51CeA86C9Ce8DcA05122CfE498220cbfcAaE948#
+code 
 
 
 
