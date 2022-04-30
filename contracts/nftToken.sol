@@ -17,7 +17,7 @@ contract MichyNft is ERC721URIStorage  {
 
    //@notice store my svg
      string svg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='black' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
-     string svgTwo =   "'/><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
+    string svgTwo =   "'/><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
 
     string [] foodItem = ["salt", "seasoning-cube", "crayfish", "pepper", "tommatoes", "onion", "fresh-fish", "vegetables", "semo", "pomo", "stock-fish", "palm-oil", "dried-fish", "assorted", "ogiri"];
     string [] fruits = ["cuccumba", "mango", "avocado", "peneapple", "bananas", "blackberry", "strawberry", "kiwi", "lemon", "carrot", "soursop", "pawpaw", "pears", "apple", "orange"];
@@ -57,6 +57,7 @@ event NewMichyNftMinted(address sender, uint256 tokenId);
     function random(string memory input) internal pure returns(uint256) {
    return uint256(keccak256(abi.encodePacked(input)));
     }
+
 
     //@notice declare a function for users to get their NFT.
     function getNfts() public {
@@ -107,7 +108,7 @@ event NewMichyNftMinted(address sender, uint256 tokenId);
         
         
         //@notice set the nft data
-        _setTokenURI(newNft, finalTokenUrl);
+        _setTokenURI(newNft, "ipfs://QmaCmcaj9ZHKrEF1NcaFgUAGXGxbyNXDgPBpUDwe4rt41m");
         console.log("NFT has been minted to %s..", msg.sender);
 
         //@notice increment the counter for the next minted nft 

@@ -5,9 +5,9 @@ import { ethers } from "ethers";
 import MichyNft from './utils/MichyNft.json';
 
 // Constants
-const TWITTER_HANDLE = '_buildspace';
+const TWITTER_HANDLE = 'michyToken';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-const OPENSEA_LINK = '';
+const OPENSEA_LINK = 'https://testnets.opensea.io/collection/';
 const TOTAL_MINT_COUNT = 50;
 
 const App = () => {
@@ -53,13 +53,19 @@ const App = () => {
      console.log("Connected", accounts[0]);
  const userAddress = setUserAccount(accounts[0]);
 
+     let chainId = await ethereum.request({method: "eth_chainId"});
+     console.log("Connected to chain..", chainId);
+
+     let rinkebyChainId = "0x4";
+     if(chainId !== rinkebyChainId) {
+       alert("You are not connected to the rinkeby test network!");
+     }
      setEventListener();
   } catch(error){
      console.log(error);
   }
    }
-  /*set an event listener capture the mint event,
-  * get the tokenId, and give the user their OpenSea link for their newly minted NFT.*/
+  // set an event listener to capture the mint event, get the tokenId, and give the user their OpenSea link for their newly minted NFT.
   const setEventListener = async () => {
     try{
       const { ethereum } = window;
@@ -85,13 +91,13 @@ contractAddress.on(NewMichyNftMinted, (from, tokenId) => {
 
   // function to call the contract from the web
   const callContractFromWeb = async () => {
-    const contractAddress = "0xd23d17B0AB8F10b29d093A76f4BE1bee8165f7A5";
+    const contractAddress = "0x776970Cc33A2C04B446Ed5E1f869275A1F7E4f45";
 
     try{
       const { ethereum } = window;
 
       if (ethereum) {
-  const provider = new ethers.providers.Web3Provider(ethereum);
+  const provider = new ethers.providers.web3Provider(ethereum);
 const signer = provider.getSigner();
         // create the connection to the contract 
         const connectContract = new ethers.Contract(contractAddress, MichyNft.abi, signer);
@@ -142,17 +148,23 @@ const signer = provider.getSigner();
     )}
   );
         <div className="footer-container">
+       <a
+            className="footer-text"
+            href={OPENSEA_LINK}
+            target="_blank"
+            rel="noreferrer"
+          >View collection on OpenSea </a>
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
           <a
             className="footer-text"
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built on @${TWITTER_HANDLE}`}</a>
+          >{`Follow me @${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>
   );
 };
 
-export default App;
+export default App; 
