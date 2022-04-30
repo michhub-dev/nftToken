@@ -73,8 +73,8 @@ const App = () => {
       if(ethereum){
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
-        const connectContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
-contractAddress.on(NewMichyNftMinted, (from, tokenId) => {
+        const connectContract = new ethers.Contract(contractAddress, MichyNft.abi, signer);
+connectContract.on(NewMichyNftMinted, (from, tokenId) => {
   console.log(from, tokenId.toNumber());
   alert(`Your NFT has been minted and sent to your wallet. It may be blank right now, it could take a max of 10 min to show on the opensea. View it here: https://testnets.opensea.io/assets/${contractAddress}/${tokenId.toNumber()}`);
 });
@@ -91,7 +91,7 @@ contractAddress.on(NewMichyNftMinted, (from, tokenId) => {
 
   // function to call the contract from the web
   const callContractFromWeb = async () => {
-    const contractAddress = "0x776970Cc33A2C04B446Ed5E1f869275A1F7E4f45";
+    const contractAddress = "0xD51CeA86C9Ce8DcA05122CfE498220cbfcAaE948";
 
     try{
       const { ethereum } = window;
