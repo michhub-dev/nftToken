@@ -71,7 +71,7 @@ const App = () => {
       const { ethereum } = window;
 
       if(ethereum){
-        const provider = new ethers.providers.web3Provider(ethereum);
+        const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const connectContract = new ethers.contract(contractAddress, MichyNft.abi, signer);
 contractAddress.on(NewMichyNftMinted, (from, tokenId) => {
@@ -97,7 +97,7 @@ contractAddress.on(NewMichyNftMinted, (from, tokenId) => {
       const { ethereum } = window;
 
       if (ethereum) {
-  const provider = new ethers.providers.web3Provider(ethereum);
+  const provider = new ethers.providers.Web3Provider(ethereum);
 const signer = provider.getSigner();
         // create the connection to the contract 
         const connectContract = new ethers.Contract(contractAddress, MichyNft.abi, signer);
@@ -167,4 +167,4 @@ const signer = provider.getSigner();
   );
 };
 
-export default App; 
+export default App;

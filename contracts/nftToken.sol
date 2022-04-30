@@ -19,11 +19,11 @@ contract MichyNft is ERC721URIStorage  {
      string svg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='black' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
     string svgTwo =   "'/><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
 
-    string [] foodItem = ["salt", "seasoning-cube", "crayfish", "pepper", "tommatoes", "onion", "fresh-fish", "vegetables", "semo", "pomo", "stock-fish", "palm-oil", "dried-fish", "assorted", "ogiri"];
-    string [] fruits = ["cuccumba", "mango", "avocado", "peneapple", "bananas", "blackberry", "strawberry", "kiwi", "lemon", "carrot", "soursop", "pawpaw", "pears", "apple", "orange"];
-    string [] animals = ["dog", "monkey", "geraf", "zebra", "chetah", "antelop", "scurrel", "hippopotamus", "pig", "sheep", "cow", "goat", "eliphant", "tiger", "lion"];
+    string[] foodItem = ["salt", "seasoning-cube", "crayfish", "pepper", "tommatoes", "onion", "fresh-fish", "vegetables", "semo", "pomo", "stock-fish", "palm-oil", "dried-fish", "assorted", "ogiri"];
+    string[] fruits = ["cuccumba", "mango", "avocado", "peneapple", "bananas", "blackberry", "strawberry", "kiwi", "lemon", "carrot", "soursop", "pawpaw", "pears", "apple", "orange"];
+    string[] animals = ["dog", "monkey", "geraf", "zebra", "chetah", "antelop", "scurrel", "hippopotamus", "pig", "sheep", "cow", "goat", "eliphant", "tiger", "lion"];
 
-   string [] colors = ["green", "blue", "yellow", "red", "brown", "white", "black", "purple", "pink", "grey", "orange", "gold", "silver"];
+   string[] colors = ["green", "blue", "yellow", "red", "brown", "white", "black", "purple", "pink", "grey", "orange", "gold", "silver"];
 event NewMichyNftMinted(address sender, uint256 tokenId); 
 
     constructor() ERC721 ("MichyToken", "MTK") {
@@ -32,24 +32,24 @@ event NewMichyNftMinted(address sender, uint256 tokenId);
     
     //@notice a function that will randomly pick word from each array
     function getRandomFoodItem(uint256 tokenId) public view returns(string memory) {
-        uint256 rand = random(string(abi.encodePacked("salt", Strings.toString(tokenId))));
+        uint256 rand = random(string(abi.encodePacked("FIRST_WORD", Strings.toString(tokenId))));
         rand = rand % foodItem.length;
         return foodItem[rand]; 
     }
 
     function getRandomFruits(uint256 tokenId) public view returns(string memory) {
-        uint256 rand = random(string(abi.encodePacked("cuccumba", Strings.toString(tokenId))));
+        uint256 rand = random(string(abi.encodePacked("SECOND_WORD", Strings.toString(tokenId))));
         rand = rand % fruits.length; 
         return fruits[rand]; 
     }
     function getRandomAnimals(uint256 tokenId) public view returns(string memory) {
-        uint256 rand = random(string(abi.encodePacked("dog", Strings.toString(tokenId))));
+        uint256 rand = random(string(abi.encodePacked("THIRD_WORD", Strings.toString(tokenId))));
         rand = rand % animals.length;
         return animals[rand];
     }
    
    function getRandomColors(uint256 tokenId) public view returns(string memory) {
-       uint256 rand = random(string(abi.encodePacked("green", Strings.toString(tokenId))));
+       uint256 rand = random(string(abi.encodePacked("COLOR", Strings.toString(tokenId))));
        rand = rand % colors.length;
        return colors[rand];
    }
@@ -68,7 +68,7 @@ event NewMichyNftMinted(address sender, uint256 tokenId);
   string memory firstItem = getRandomFoodItem(newNft);
   string memory secondItem = getRandomFruits(newNft);
   string memory thirdItem = getRandomAnimals(newNft); 
-  string memory combineItem = string(abi.encodePacked(firstItem, secondItem,thirdItem));
+  string memory combineItem = string(abi.encodePacked(firstItem, secondItem, thirdItem));
 
   string memory randomColors = getRandomColors(newNft);
 //@notice combine them all together and close with the tag
