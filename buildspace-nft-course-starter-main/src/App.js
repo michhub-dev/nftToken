@@ -7,7 +7,7 @@ import MichyNft from './utils/MichyNft.json';
 // Constants
 const TWITTER_HANDLE = 'michyToken';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-const OPENSEA_LINK = 'https://testnets.opensea.io/collection/';
+const OPENSEA_LINK = "https://testnets.opensea.io/collection/michytoken-hjpoekjts2";
 const TOTAL_MINT_COUNT = 50;
 
 const App = () => {
