@@ -6,8 +6,7 @@
 ## Etherscan link
  https://t.co/Z9Fy2y3EBq
 * Deployed site: https://nft-starter-project.michytoken.repl.co/
-* Verified contract on Etherscan: https://rinkeby.etherscan.io/address/0xD51CeA86C9Ce8DcA05122CfE498220cbfcAaE948#
-code 
+* Verified contract on Etherscan:https://rinkeby.etherscan.io/address/0xD51CeA86C9Ce8DcA05122CfE498220cbfcAaE948#code
 
 
 
